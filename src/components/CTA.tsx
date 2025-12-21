@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Plane, ArrowRight } from 'lucide-react';
 
@@ -28,12 +29,14 @@ export const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="gold" size="xl" className="group">
-              Send Inquiry
-              <ArrowRight className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" />
+            <Button variant="gold" size="xl" className="group" asChild>
+              <Link to="/contact">
+                Send Inquiry
+                <ArrowRight className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
-            <Button variant="outline" size="xl">
-              View All Destinations
+            <Button variant="outline" size="xl" asChild>
+              <Link to="/itineraries">View All Destinations</Link>
             </Button>
           </div>
         </div>

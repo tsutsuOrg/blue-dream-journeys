@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 import heroImage from '@/assets/hero-beach.jpg';
@@ -35,11 +36,11 @@ export const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up opacity-0 delay-400">
-            <Button variant="gold" size="xl">
-              Start Your Journey
+            <Button variant="gold" size="xl" asChild>
+              <Link to="/contact">Start Your Journey</Link>
             </Button>
-            <Button variant="hero" size="xl">
-              Explore Destinations
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/itineraries">Explore Destinations</Link>
             </Button>
           </div>
 

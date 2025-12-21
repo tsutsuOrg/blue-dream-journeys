@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import greeceImage from '@/assets/destination-greece.jpg';
 import maldivesImage from '@/assets/destination-maldives.jpg';
@@ -6,23 +7,27 @@ import dubaiImage from '@/assets/destination-dubai.jpg';
 
 const destinations = [
   {
-    name: 'Greece',
-    description: 'Explore ancient ruins and stunning Mediterranean coastlines on an unforgettable Aegean adventure.',
+    name: 'Uganda',
+    slug: 'uganda',
+    description: 'Encounter majestic mountain gorillas and experience the Pearl of Africa.',
     image: greeceImage,
   },
   {
-    name: 'Maldives',
-    description: 'Experience luxury overwater villas and pristine turquoise waters in this tropical paradise.',
+    name: 'Rwanda',
+    slug: 'rwanda',
+    description: 'Discover the land of a thousand hills with incredible wildlife and culture.',
     image: maldivesImage,
   },
   {
-    name: 'Bali',
-    description: 'Discover lush rice terraces, sacred temples, and rich cultural heritage in Indonesia.',
+    name: 'Kenya',
+    slug: 'kenya',
+    description: 'Witness the great migration and explore iconic African savannahs.',
     image: baliImage,
   },
   {
-    name: 'Dubai',
-    description: 'Marvel at architectural wonders and experience world-class luxury in this modern oasis.',
+    name: 'Tanzania',
+    slug: 'tanzania',
+    description: 'From Serengeti plains to Zanzibar beaches, an unforgettable African journey.',
     image: dubaiImage,
   },
 ];
@@ -47,9 +52,10 @@ export const Destinations = () => {
         {/* Destinations Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {destinations.map((destination, index) => (
-            <div
+            <Link
+              to={`/destinations/${destination.slug}`}
               key={destination.name}
-              className="group relative overflow-hidden rounded-2xl shadow-ocean cursor-pointer h-[400px]"
+              className="group relative overflow-hidden rounded-2xl shadow-ocean cursor-pointer h-[400px] block"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Background Image */}
@@ -74,7 +80,7 @@ export const Destinations = () => {
                   <ArrowRight className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
