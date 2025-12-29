@@ -3,7 +3,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { getTourBySlug } from '@/data/tours';
-import { ArrowRight, ArrowLeft, Clock, Users, Mountain, MapPin, Check, Calendar, Phone } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Clock, Users, Mountain, MapPin, Check, X, Info, Phone, Mail } from 'lucide-react';
 
 const TourDetails = () => {
   const { tourSlug } = useParams<{ tourSlug: string }>();
@@ -32,44 +32,39 @@ const TourDetails = () => {
     <main className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Large Banner Image */}
-      <section className="relative h-[60vh] min-h-[500px]">
+      {/* Hero Banner */}
+      <section className="relative h-[70vh] min-h-[600px]">
         <div className="absolute inset-0">
           <img
             src={tour.bannerImage}
             alt={tour.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
         </div>
         
-        {/* Banner Content */}
-        <div className="absolute bottom-0 left-0 right-0 pb-12">
+        <div className="absolute bottom-0 left-0 right-0 pb-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl">
-              <span className="inline-block px-4 py-1.5 bg-secondary text-secondary-foreground text-sm font-semibold rounded-full mb-4">
+            <div className="max-w-5xl">
+              <span className="inline-block px-5 py-2 bg-secondary text-secondary-foreground text-sm font-bold rounded-full mb-6">
                 {tour.destination}
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-foreground mb-6 leading-tight">
                 {tour.title}
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mb-6">
-                {tour.description}
-              </p>
               
-              {/* Quick Info Pills */}
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm px-4 py-2 rounded-full border border-border/50">
-                  <Clock className="w-4 h-4 text-secondary" />
-                  <span className="font-medium text-foreground text-sm">{tour.duration}</span>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-2 bg-card/90 backdrop-blur-sm px-5 py-3 rounded-full border border-border">
+                  <Clock className="w-5 h-5 text-secondary" />
+                  <span className="font-semibold text-foreground">{tour.duration}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm px-4 py-2 rounded-full border border-border/50">
-                  <Users className="w-4 h-4 text-secondary" />
-                  <span className="font-medium text-foreground text-sm">{tour.groupSize}</span>
+                <div className="flex items-center gap-2 bg-card/90 backdrop-blur-sm px-5 py-3 rounded-full border border-border">
+                  <Users className="w-5 h-5 text-secondary" />
+                  <span className="font-semibold text-foreground">{tour.groupSize}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm px-4 py-2 rounded-full border border-border/50">
-                  <Mountain className="w-4 h-4 text-secondary" />
-                  <span className="font-medium text-foreground text-sm">{tour.difficulty}</span>
+                <div className="flex items-center gap-2 bg-card/90 backdrop-blur-sm px-5 py-3 rounded-full border border-border">
+                  <Mountain className="w-5 h-5 text-secondary" />
+                  <span className="font-semibold text-foreground">{tour.difficulty}</span>
                 </div>
               </div>
             </div>
@@ -77,12 +72,12 @@ const TourDetails = () => {
         </div>
       </section>
 
-      {/* Back Link */}
-      <div className="bg-muted border-b border-border/50">
+      {/* Breadcrumb Navigation */}
+      <div className="bg-muted/50 border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <Link
             to="/itineraries"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-secondary transition-colors font-medium"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-secondary transition-colors font-medium text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to All Tours
@@ -91,186 +86,272 @@ const TourDetails = () => {
       </div>
 
       {/* Main Content */}
-      <section className="py-16 bg-background">
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Left Content */}
-            <div className="lg:col-span-2 space-y-16">
-              {/* Tour Gallery */}
-              {tour.galleryImages && tour.galleryImages.length > 0 && (
+          <div className="max-w-5xl mx-auto">
+            
+            {/* Safari Overview */}
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                Safari <span className="text-secondary">Overview</span>
+              </h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {tour.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Tour Gallery */}
+            {tour.galleryImages && tour.galleryImages.length > 0 && (
+              <div className="mb-20">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                  Experience <span className="text-secondary">Gallery</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {tour.galleryImages.map((image, index) => (
+                    <div key={index} className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                      <img
+                        src={image}
+                        alt={`${tour.title} - Gallery ${index + 1}`}
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Safari Highlights */}
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                Safari <span className="text-secondary">Highlights</span>
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {tour.highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border hover:border-secondary/50 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 mt-1">
+                      <Check className="w-5 h-5 text-secondary" />
+                    </div>
+                    <span className="font-medium text-foreground text-lg leading-relaxed">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Day-by-Day Itinerary */}
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
+                Day-by-Day <span className="text-secondary">Itinerary</span>
+              </h2>
+              <p className="text-muted-foreground text-lg mb-10">
+                Experience every moment of your safari adventure with our detailed daily breakdown.
+              </p>
+              
+              <div className="space-y-8">
+                {tour.itinerary.map((day, index) => (
+                  <div
+                    key={day.day}
+                    className="group relative bg-card rounded-3xl border border-border overflow-hidden hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className={`flex flex-col ${day.image ? 'lg:flex-row' : ''}`}>
+                      {/* Day Image */}
+                      {day.image && (
+                        <div className="lg:w-2/5 relative overflow-hidden">
+                          <div className="aspect-video lg:aspect-auto lg:h-full">
+                            <img
+                              src={day.image}
+                              alt={`Day ${day.day}: ${day.title}`}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                          </div>
+                          <div className="absolute top-6 left-6">
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex flex-col items-center justify-center text-primary-foreground font-bold shadow-xl">
+                              <span className="text-xs opacity-90">Day</span>
+                              <span className="text-2xl">{day.day}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Day Content */}
+                      <div className={`${day.image ? 'lg:w-3/5' : 'w-full'} p-8 lg:p-10 flex flex-col justify-center`}>
+                        {!day.image && (
+                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex flex-col items-center justify-center text-primary-foreground font-bold shadow-lg mb-6">
+                            <span className="text-xs opacity-90">Day</span>
+                            <span className="text-2xl">{day.day}</span>
+                          </div>
+                        )}
+                        <h3 className="text-2xl lg:text-3xl font-heading font-bold text-foreground mb-4">
+                          {day.title}
+                        </h3>
+                        <p className="text-muted-foreground text-lg leading-relaxed">
+                          {day.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* What's Included & Excluded */}
+            <div className="mb-20">
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* Included */}
                 <div>
-                  <h2 className="text-2xl font-heading font-bold text-foreground mb-6">
-                    Tour <span className="text-secondary">Gallery</span>
+                  <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                    What's <span className="text-secondary">Included</span>
                   </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {tour.galleryImages.map((image, index) => (
-                      <div key={index} className="aspect-[4/3] rounded-xl overflow-hidden">
-                        <img
-                          src={image}
-                          alt={`${tour.title} - Gallery ${index + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
+                  <div className="bg-card border border-border rounded-3xl p-8 space-y-4">
+                    {tour.included.map((item, index) => (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 mt-1">
+                          <Check className="w-4 h-4 text-secondary" />
+                        </div>
+                        <span className="text-foreground text-lg leading-relaxed">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-              )}
 
-              {/* Highlights */}
-              <div>
-                <h2 className="text-2xl font-heading font-bold text-foreground mb-6">
-                  Tour <span className="text-secondary">Highlights</span>
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {tour.highlights.map((highlight) => (
-                    <div key={highlight} className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border/50">
-                      <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                        <Check className="w-4 h-4 text-secondary" />
-                      </div>
-                      <span className="font-medium text-foreground">{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Day-by-Day Itinerary */}
-              <div>
-                <h2 className="text-2xl font-heading font-bold text-foreground mb-8">
-                  Day-by-Day <span className="text-secondary">Itinerary</span>
-                </h2>
-                <div className="space-y-6">
-                  {tour.itinerary.map((day, index) => (
-                    <div
-                      key={day.day}
-                      className="group relative bg-card rounded-2xl border border-border/50 overflow-hidden hover:shadow-lg transition-shadow duration-300"
-                    >
-                      <div className={`flex flex-col ${day.image ? 'lg:flex-row' : ''}`}>
-                        {/* Day Image */}
-                        {day.image && (
-                          <div className="lg:w-2/5 aspect-video lg:aspect-auto relative overflow-hidden">
-                            <img
-                              src={day.image}
-                              alt={`Day ${day.day}: ${day.title}`}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute top-4 left-4">
-                              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-primary-foreground font-bold shadow-lg">
-                                Day {day.day}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* Day Content */}
-                        <div className={`${day.image ? 'lg:w-3/5' : 'w-full'} p-6 lg:p-8 flex flex-col justify-center`}>
-                          {!day.image && (
-                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-primary-foreground font-bold shadow-md mb-4">
-                              Day {day.day}
-                            </div>
-                          )}
-                          <h3 className="text-xl font-heading font-semibold text-foreground mb-3">
-                            Day {day.day}: {day.title}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed">{day.description}</p>
+                {/* Excluded */}
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                    What's <span className="text-secondary">Excluded</span>
+                  </h2>
+                  <div className="bg-card border border-border rounded-3xl p-8 space-y-4">
+                    {tour.excluded && tour.excluded.map((item, index) => (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center shrink-0 mt-1">
+                          <X className="w-4 h-4 text-muted-foreground" />
                         </div>
+                        <span className="text-muted-foreground text-lg leading-relaxed">{item}</span>
                       </div>
-                      
-                      {/* Connector Line */}
-                      {index < tour.itinerary.length - 1 && (
-                        <div className="hidden lg:block absolute -bottom-3 left-10 w-0.5 h-6 bg-border z-10" />
-                      )}
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* What's Included */}
-              <div>
-                <h2 className="text-2xl font-heading font-bold text-foreground mb-6">
-                  What's <span className="text-secondary">Included</span>
+            {/* Customization Options */}
+            {tour.customization && tour.customization.length > 0 && (
+              <div className="mb-20">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                  Customization <span className="text-secondary">Options</span>
                 </h2>
-                <div className="grid sm:grid-cols-2 gap-3 bg-card border border-border/50 rounded-2xl p-6">
-                  {tour.included.map((item) => (
-                    <div key={item} className="flex items-center gap-3">
-                      <Check className="w-5 h-5 text-secondary shrink-0" />
-                      <span className="text-foreground">{item}</span>
-                    </div>
-                  ))}
+                <div className="bg-gradient-to-br from-secondary/5 to-primary/5 border border-secondary/20 rounded-3xl p-8">
+                  <p className="text-muted-foreground text-lg mb-6">
+                    This tour can be tailored to your preferences. Available options include:
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {tour.customization.map((option, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <Info className="w-5 h-5 text-secondary shrink-0" />
+                        <span className="text-foreground font-medium text-lg">{option}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Why This Trip is Special */}
+            {tour.whySpecial && (
+              <div className="mb-20">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                  Why This Trip is <span className="text-secondary">Special</span>
+                </h2>
+                <div className="bg-card border border-border rounded-3xl p-10">
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    {tour.whySpecial}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Important Information */}
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                Important <span className="text-secondary">Information</span>
+              </h2>
+              <div className="bg-muted/50 border border-border rounded-3xl p-10 space-y-6">
+                <div className="flex items-start gap-4">
+                  <Info className="w-6 h-6 text-secondary shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-bold text-foreground text-xl mb-2">Customization Available</h3>
+                    <p className="text-muted-foreground text-lg">
+                      This safari can be fully customized to match your dates, preferred lodges, interests, or group size.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Info className="w-6 h-6 text-secondary shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-bold text-foreground text-xl mb-2">Booking & Permits</h3>
+                    <p className="text-muted-foreground text-lg">
+                      Gorilla and chimpanzee permits are subject to availability. We recommend booking at least 3-6 months in advance for peak season travel.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Sidebar - Booking Card */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-32 space-y-6">
-                {/* Pricing Card */}
-                <div className="bg-card rounded-2xl p-8 border border-border/50 shadow-lg">
-                  <div className="text-center mb-6 pb-6 border-b border-border/50">
-                    <p className="text-muted-foreground text-sm mb-1">Starting from</p>
-                    <p className="text-accent font-heading text-4xl font-bold">{tour.price}</p>
-                    <p className="text-muted-foreground text-sm">per person</p>
-                  </div>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3 text-foreground">
-                      <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
-                        <Calendar className="w-5 h-5 text-secondary" />
-                      </div>
-                      <span className="font-medium">{tour.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-foreground">
-                      <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
-                        <Users className="w-5 h-5 text-secondary" />
-                      </div>
-                      <span className="font-medium">{tour.groupSize}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-foreground">
-                      <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
-                        <Mountain className="w-5 h-5 text-secondary" />
-                      </div>
-                      <span className="font-medium">{tour.difficulty} difficulty</span>
-                    </div>
-                  </div>
-
-                  <Link to="/contact" className="block">
-                    <Button variant="gold" size="xl" className="w-full shadow-gold">
-                      Book This Tour
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </Link>
-
-                  <p className="text-center text-muted-foreground text-sm mt-4">
-                    No payment required to inquire
-                  </p>
-                </div>
-
-                {/* Quick Contact Card */}
-                <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 text-center">
-                  <Phone className="w-10 h-10 text-primary-foreground mx-auto mb-3" />
-                  <h3 className="text-lg font-heading font-semibold text-primary-foreground mb-2">
-                    Need Help Planning?
-                  </h3>
-                  <p className="text-primary-foreground/80 text-sm mb-4">
-                    Our safari experts are here to help customize your trip.
-                  </p>
-                  <Link to="/contact">
-                    <Button variant="hero" size="sm" className="w-full">
-                      Contact Us
-                    </Button>
-                  </Link>
-                </div>
+            {/* Why Choose Dream Destination */}
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8">
+                Why Choose <span className="text-secondary">Dream Destination Tours & Travel</span>
+              </h2>
+              <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 rounded-3xl p-10">
+                <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                  Dream Destination Tours & Travel ensures smooth, safe, and memorable journeys. Our knowledgeable guides bring Rwanda's culture, scenery, and history to life, while our comfortable vehicles make your experience stress-free.
+                </p>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Experience genuine hospitality, professional service, and well-organized tours with us from start to finish. Your guide is your storyteller, wildlife expert, and cultural ambassador, ensuring safety, comfort, and inspiring memories.
+                </p>
               </div>
             </div>
+
+            {/* Booking CTA */}
+            <div className="bg-gradient-to-br from-primary to-secondary rounded-3xl p-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">
+                Ready for Your Safari Adventure?
+              </h2>
+              <p className="text-primary-foreground/90 text-lg mb-8 max-w-2xl mx-auto">
+                Book your {tour.title} with Dream Destination Tours & Travel today. Our team is ready to create an unforgettable experience tailored just for you.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/contact">
+                  <Button variant="hero" size="lg" className="w-full sm:w-auto shadow-2xl">
+                    <Mail className="w-5 h-5 mr-2" />
+                    Book This Safari
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20">
+                    <Phone className="w-5 h-5 mr-2" />
+                    Contact Us
+                  </Button>
+                </Link>
+              </div>
+              <p className="text-primary-foreground/70 text-sm mt-6">
+                No payment required to inquire • Free consultation available
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Other Tours */}
-      <section className="py-20 bg-muted">
+      {/* Explore More Tours */}
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-heading font-bold text-foreground mb-8">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">
             Explore More <span className="text-secondary">Itineraries</span>
           </h2>
+          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+            Discover other incredible safari experiences across East Africa
+          </p>
           <Link to="/itineraries">
             <Button variant="brand" size="lg">
               View All Tours <ArrowRight className="w-5 h-5 ml-2" />
