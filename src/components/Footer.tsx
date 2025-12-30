@@ -77,22 +77,22 @@ export const Footer = () => {
             <h4 className="font-heading font-bold text-lg mb-4">Get in Touch</h4>
             <div className="space-y-3">
               <a
-                href="mailto:info@dreamdestination.com"
+                href="mailto:info@ddestinationtravel.com"
                 className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors text-sm"
               >
                 <Mail className="w-4 h-4 shrink-0" />
                 <span>info@dreamdestination.com</span>
               </a>
               <a
-                href="tel:+256700000000"
+                href="tel:+250 788 328 237"
                 className="flex items-center gap-3 text-primary-foreground/80 hover:text-accent transition-colors text-sm"
               >
                 <Phone className="w-4 h-4 shrink-0" />
-                <span>+256 700 000 000</span>
+                <span>+250 788 328 237</span>
               </a>
               <div className="flex items-start gap-3 text-primary-foreground/80 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Rwanda, Kigali</span>
+                <span>KK 486 St, Kigali , Kigali - Rwanda</span>
               </div>
             </div>
           </div>
