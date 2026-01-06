@@ -16,6 +16,11 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
+import CategoryPage from "./pages/services/CategoryPage";
+import { wildlifeSafarisData } from "./data/wildlifeSafaris";
+import { primateTrackingData } from "./data/primateTracking";
+import { culturalToursData } from "./data/culturalTours";
+import { multiDayToursData } from "./data/multiDayTours";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +40,12 @@ const App = () => (
           
           {/* Destinations */}
           <Route path="/destinations/:slug" element={<DestinationPage />} />
+          
+          {/* Services */}
+          <Route path="/services/wildlife-safaris" element={<CategoryPage data={wildlifeSafarisData} />} />
+          <Route path="/services/primate-tracking" element={<CategoryPage data={primateTrackingData} />} />
+          <Route path="/services/cultural-tours" element={<CategoryPage data={culturalToursData} />} />
+          <Route path="/services/multi-day-tours" element={<CategoryPage data={multiDayToursData} />} />
           
           {/* National Parks */}
           <Route path="/national-park/:parkSlug" element={<NationalPark />} />

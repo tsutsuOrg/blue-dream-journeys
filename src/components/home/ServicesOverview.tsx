@@ -9,7 +9,7 @@ const services = [
     subtitle: 'East Africa (EAC)',
     description: 'Witness the Big Five and the Great Migration across Kenya, Tanzania, Uganda, and Rwanda.',
     image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&h=400&fit=crop',
-    link: '/itineraries',
+    link: '/services/wildlife-safaris',
   },
   {
     icon: TreePine,
@@ -17,7 +17,7 @@ const services = [
     subtitle: 'Rwanda & Uganda',
     description: 'Get up close with mountain gorillas and chimpanzees in their natural rainforest habitats.',
     image: 'https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600&h=400&fit=crop',
-    link: '/destinations/rwanda',
+    link: '/services/primate-tracking',
   },
   {
     icon: Users,
@@ -25,7 +25,7 @@ const services = [
     subtitle: 'Community Experiences',
     description: 'Immerse yourself in local traditions, village visits, and authentic African cultural experiences.',
     image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600&h=400&fit=crop',
-    link: '/itineraries',
+    link: '/services/cultural-tours',
   },
   {
     icon: Calendar,
@@ -33,7 +33,7 @@ const services = [
     subtitle: 'Extended Adventures',
     description: 'Comprehensive safari packages from 3 to 21 days, covering multiple destinations and experiences.',
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&h=400&fit=crop',
-    link: '/itineraries',
+    link: '/services/multi-day-tours',
   },
 ];
 

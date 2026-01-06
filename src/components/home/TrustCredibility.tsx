@@ -25,11 +25,11 @@ const certifications = [
 
 const partnerHotels = [
   {
-    name: 'Serena Hotels',
+    name: 'Kigali Serena Hotels',
     logo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=100&fit=crop',
   },
   {
-    name: 'Marriott Hotels',
+    name: 'Paramount Hotel Kigai',
     logo: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=200&h=100&fit=crop',
   },
   {
@@ -41,11 +41,39 @@ const partnerHotels = [
     logo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=200&h=100&fit=crop',
   },
   {
-    name: 'Safari Lodges',
+    name: 'Four Point By Sheraton Kigali',
     logo: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=200&h=100&fit=crop',
   },
   {
-    name: 'Eco Resorts',
+    name: 'One and Only',
+    logo: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&h=100&fit=crop',
+  },
+  {
+    name: 'Mountain Gorilla View Lodge',
+    logo: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&h=100&fit=crop',
+  },
+   {
+    name: 'Sabyinyo Lodge',
+    logo: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=200&h=100&fit=crop',
+  },
+  {
+    name: 'Akagera Game Lodge',
+    logo: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=200&h=100&fit=crop',
+  },
+   {
+    name: 'Ruzizi Tented Loddge',
+    logo: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=200&h=100&fit=crop',
+  },
+  {
+    name: 'Akagera Rhino Lodge',
+    logo: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=200&h=100&fit=crop',
+  },
+  {
+    name: 'Nyungwe Top View Hotel',
+    logo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=100&fit=crop',
+  },
+  {
+    name: 'Khen Baraham Guest House',
     logo: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&h=100&fit=crop',
   },
 ];
