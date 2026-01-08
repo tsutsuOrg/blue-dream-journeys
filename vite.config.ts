@@ -9,8 +9,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
 
-  // Dynamic base path: GitHub Pages uses /repo-name/, Vercel uses /
-  base: process.env.GITHUB_PAGES === 'true' ? '/blue-dream-journeys/' : '/',
+  base: '/blue-dream-journeys/',
 
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
 
