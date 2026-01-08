@@ -1,26 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Award, Shield, BadgeCheck, FileCheck, Building2, Handshake } from 'lucide-react';
+import { Handshake } from 'lucide-react';
+import rdbLicense from '@/assets/Dream TOL.jpg';
+import rttaMembership from '@/assets/DDTT RTTA membership (1).jpg';
 
-const certifications = [
+const certificates = [
   {
-    icon: Shield,
-    title: 'Licensed Tour Operator',
-    description: 'Officially registered with Rwanda Development Board',
+    image: rdbLicense,
+    title: 'RDB Tourism Operating License',
   },
   {
-    icon: BadgeCheck,
-    title: 'IATA Certified',
-    description: 'International Air Transport Association member',
-  },
-  {
-    icon: FileCheck,
-    title: 'Travel Insurance',
-    description: 'Comprehensive coverage for all travelers',
-  },
-  {
-    icon: Award,
-    title: 'Award Winning',
-    description: 'Recognized for excellence in tourism',
+    image: rttaMembership,
+    title: 'RTTA Membership Certificate',
   },
 ];
 
@@ -128,17 +118,24 @@ export const TrustCredibility = () => {
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {certifications.map((cert) => (
+        <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
+          {certificates.map((cert) => (
             <div
               key={cert.title}
-              className="bg-muted rounded-xl p-6 text-center hover:shadow-brand transition-shadow duration-300 group"
+              className="bg-background rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                <cert.icon className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors" />
+              <div className="aspect-[4/3] overflow-hidden bg-muted/20 flex items-center justify-center p-4">
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h3 className="font-heading font-bold text-foreground mb-2">{cert.title}</h3>
-              <p className="text-muted-foreground text-sm">{cert.description}</p>
+              <div className="px-4 py-3 text-center bg-card">
+                <h3 className="font-heading font-medium text-foreground text-sm">
+                  {cert.title}
+                </h3>
+              </div>
             </div>
           ))}
         </div>

@@ -4,7 +4,7 @@ import { Footer } from '@/components/Footer';
 import { PageHero } from '@/components/PageHero';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { CountryItinerary } from '@/data/countryData';
+import { tours } from '@/data/tours';
 
 export interface CategoryData {
   slug: string;
@@ -14,7 +14,6 @@ export interface CategoryData {
   overviewDescription: string;
   experienceTitle: string;
   experienceDescription: string;
-  itineraries: CountryItinerary[];
 }
 
 interface CategoryPageProps {
@@ -22,6 +21,7 @@ interface CategoryPageProps {
 }
 
 const CategoryPage = ({ data }: CategoryPageProps) => {
+  const categoryTours = tours.filter(tour => tour.category === data.slug);
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -85,20 +85,20 @@ const CategoryPage = ({ data }: CategoryPageProps) => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.itineraries.map((itinerary) => (
+            {categoryTours.map((tour) => (
               <div
-                key={itinerary.id}
+                key={tour.slug}
                 className="group bg-card rounded-2xl overflow-hidden shadow-brand hover:shadow-lg transition-all duration-300"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
-                    src={itinerary.image}
-                    alt={itinerary.title}
+                    src={tour.bannerImage}
+                    alt={tour.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-semibold">
-                      {itinerary.days} Days
+                      {tour.duration}
                     </span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
@@ -106,14 +106,14 @@ const CategoryPage = ({ data }: CategoryPageProps) => {
 
                 <div className="p-6">
                   <h3 className="text-xl font-heading font-bold text-foreground mb-2 uppercase">
-                    {itinerary.title}
+                    {tour.title}
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                    {itinerary.description}
+                    {tour.description}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {itinerary.highlights.slice(0, 3).map((highlight) => (
+                    {tour.highlights.slice(0, 3).map((highlight) => (
                       <span
                         key={highlight}
                         className="bg-secondary/10 text-secondary px-2 py-1 rounded text-xs font-medium"
@@ -124,9 +124,11 @@ const CategoryPage = ({ data }: CategoryPageProps) => {
                   </div>
 
                   <div className="flex items-center justify-end pt-4 border-t border-border/50">
-                    <Button variant="brand" size="sm">
-                      View Itinerary
-                    </Button>
+                    <Link to={`/tour/${tour.slug}`}>
+                      <Button variant="brand" size="sm">
+                        View Itinerary
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
