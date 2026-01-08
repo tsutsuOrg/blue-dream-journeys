@@ -29,8 +29,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {/* Changed BrowserRouter to HashRouter */}
-      <HashRouter basename={import.meta.env.BASE_URL}>
+      <HashRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
