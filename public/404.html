@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dreams Destinations Tours & Travel</title>
+    <script>
+      // GitHub Pages SPA redirect
+      // This script takes the current URL and converts it to a hash-based URL
+      // for HashRouter to handle
+      
+      var pathSegmentsToKeep = 1; // For /blue-dream-journeys/ base path
+      
+      var location = window.location;
+      
+      // Redirect to index.html with the path as a hash
+      location.replace(
+        location.protocol + '//' + location.host + location.pathname.split('/').slice(0, pathSegmentsToKeep + 1).join('/') + '/#' + location.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/') + location.search + location.hash
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -4,12 +4,11 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
+  base: '/blue-dream-journeys/',
   server: {
     host: "::",
     port: 8080,
   },
- base: '/blue-dream-journeys/',
-
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
 
   resolve: {
