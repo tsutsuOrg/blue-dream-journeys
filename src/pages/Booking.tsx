@@ -13,29 +13,104 @@ import { CreditCard, Phone, Upload, CheckCircle } from 'lucide-react';
 const Booking = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string>('');
+  
+  // TEMPORARILY DISABLED: Proof of payment upload state
+  // This feature may be re-enabled in the future
+  // const [fileName, setFileName] = useState<string>('');
+  
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    country: '',
+    destination: '',
+    travelDates: '',
+    travelers: '',
+    specialRequests: '',
+  });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-    }
+  // TEMPORARILY DISABLED: Proof of payment file change handler
+  // This feature may be re-enabled in the future
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setFileName(e.target.files[0].name);
+  //   }
+  // };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Web3Forms API submission
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_BOOKING_KEY || 'YOUR_WEB3FORMS_BOOKING_KEY_HERE',
+          from_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          subject: 'New Safari Booking Request',
+          message: `
+New Booking Request
 
-    toast({
-      title: 'Booking Submitted!',
-      description: 'We will confirm your booking within 24 hours.',
-    });
+Name: ${formData.fullName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Country: ${formData.country || 'Not provided'}
+Travel Dates: ${formData.travelDates}
+Number of Travelers: ${formData.travelers}
+Selected Package: ${formData.destination}
 
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
-    setFileName('');
+Special Requests:
+${formData.specialRequests || 'None'}
+          `.trim(),
+          to_email: 'tuyizereangedivine@gmail.com',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast({
+          title: 'Booking Submitted!',
+          description: 'We will confirm your booking within 24 hours.',
+        });
+
+        // Reset form
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          country: '',
+          destination: '',
+          travelDates: '',
+          travelers: '',
+          specialRequests: '',
+        });
+        (e.target as HTMLFormElement).reset();
+        // TEMPORARILY DISABLED: Reset fileName state
+        // setFileName('');
+      } else {
+        throw new Error(result.message || 'Failed to submit booking');
+      }
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      toast({
+        title: 'Failed to Submit Booking',
+        description: 'Something went wrong. Please try again or contact us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -99,7 +174,9 @@ const Booking = () => {
                     <Input
                       id="fullName"
                       name="fullName"
-                      placeholder="John Doe"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Enter your full name"
                       required
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
                     />
@@ -114,7 +191,9 @@ const Booking = () => {
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="mutesi@gmail.com"
                       required
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
                     />
@@ -129,22 +208,25 @@ const Booking = () => {
                       id="phone"
                       name="phone"
                       type="tel"
-                      placeholder="+1 234 567 8900"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter your phone number"
                       required
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
                     />
                   </div>
 
-                  {/* Destination */}
+                  {/* Country */}
                   <div className="space-y-2">
-                    <Label htmlFor="destination" className="text-foreground font-medium">
-                      Destination <span className="text-destructive">*</span>
+                    <Label htmlFor="country" className="text-foreground font-medium">
+                      Country
                     </Label>
                     <Input
-                      id="destination"
-                      name="destination"
-                      placeholder="e.g., Uganda Gorilla Trek"
-                      required
+                      id="country"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      placeholder="e.g., Rwanda"
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
                     />
                   </div>
@@ -157,6 +239,8 @@ const Booking = () => {
                     <Input
                       id="travelDates"
                       name="travelDates"
+                      value={formData.travelDates}
+                      onChange={handleChange}
                       placeholder="e.g., March 15-22, 2025"
                       required
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
@@ -173,7 +257,25 @@ const Booking = () => {
                       name="travelers"
                       type="number"
                       min="1"
+                      value={formData.travelers}
+                      onChange={handleChange}
                       placeholder="2"
+                      required
+                      className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
+                    />
+                  </div>
+
+                  {/* Destination */}
+                  <div className="space-y-2">
+                    <Label htmlFor="destination" className="text-foreground font-medium">
+                      Selected Package / Destination <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="destination"
+                      name="destination"
+                      value={formData.destination}
+                      onChange={handleChange}
+                      placeholder="e.g., Uganda Gorilla Trek"
                       required
                       className="bg-background border-border rounded-xl h-12 focus:ring-2 focus:ring-secondary/20"
                     />
@@ -183,19 +285,22 @@ const Booking = () => {
                 {/* Special Requests */}
                 <div className="space-y-2">
                   <Label htmlFor="specialRequests" className="text-foreground font-medium">
-                    Special Requests
+                    Special Requests / Message
                   </Label>
                   <Textarea
                     id="specialRequests"
                     name="specialRequests"
+                    value={formData.specialRequests}
+                    onChange={handleChange}
                     placeholder="Any dietary requirements, accessibility needs, or special occasions..."
                     rows={4}
                     className="bg-background border-border rounded-xl resize-none focus:ring-2 focus:ring-secondary/20"
                   />
                 </div>
 
-                {/* File Upload */}
-                <div className="space-y-2">
+                {/* TEMPORARILY DISABLED: Proof of Payment Upload */}
+                {/* This feature may be re-enabled in the future */}
+                {/* <div className="space-y-2">
                   <Label htmlFor="paymentProof" className="text-foreground font-medium">
                     Proof of Payment <span className="text-destructive">*</span>
                   </Label>
@@ -224,7 +329,7 @@ const Booking = () => {
                       )}
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Submit Button */}
                 <Button

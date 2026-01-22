@@ -102,17 +102,17 @@ const DestinationPage = () => {
 
       {/* Section 3: Activity Highlights */}
       <div id="activities">
-        <ActivityHighlights activities={country.activities} countryName={country.name} />
+        <ActivityHighlights activities={country.activities} countryName={country.name} activityHighlight={country.activityHighlight} />
       </div>
 
       {/* Section 4: National Parks (alternating background) */}
       <div id="parks">
-        <NationalParks parks={country.parks} countryName={country.name} />
+        <NationalParks parks={country.parks} countryName={country.name} parksHighlight={country.parksHighlight} />
       </div>
 
       {/* Section 5: Car Rental */}
       <div id="car-rental">
-        <CarRentalSection cars={country.cars} countryName={country.name} />
+        <CarRentalSection cars={country.cars} countryName={country.name} carRentalHighlight={country.carRentalHighlight} />
       </div>
 
       {/* CTA Section */}

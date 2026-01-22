@@ -23,15 +23,54 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    toast({
-      title: 'Message Sent!',
-      description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
-    });
-    
-    setFormData({ name: '', email: '', phone: '', destination: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      // Web3Forms API submission
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'YOUR_WEB3FORMS_ACCESS_KEY_HERE',
+          from_name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: `New Contact Form Inquiry - ${formData.destination || 'General'}`,
+          message: `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Interested Destination: ${formData.destination || 'Not specified'}
+
+Message:
+${formData.message}
+          `.trim(),
+          to_email: 'tuyizereangedivine@gmail.com',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast({
+          title: 'Message Sent!',
+          description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        });
+        
+        setFormData({ name: '', email: '', phone: '', destination: '', message: '' });
+      } else {
+        throw new Error(result.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: 'Failed to Send',
+        description: 'Something went wrong. Please try again or contact us directly via email.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -151,7 +190,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        placeholder="John Doe"
+                        placeholder="Enter your full name"
                         className="bg-background border-border/80 rounded-xl h-12 focus:border-secondary focus:ring-secondary/20"
                       />
                     </div>
@@ -166,7 +205,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="john@example.com"
+                        placeholder="eg: kagabo@example.com"
                         className="bg-background border-border/80 rounded-xl h-12 focus:border-secondary focus:ring-secondary/20"
                       />
                     </div>
@@ -182,7 +221,7 @@ const Contact = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+1 (234) 567-890"
+                        placeholder="Enter your phone number"
                         className="bg-background border-border/80 rounded-xl h-12 focus:border-secondary focus:ring-secondary/20"
                       />
                     </div>
@@ -195,7 +234,7 @@ const Contact = () => {
                         name="destination"
                         value={formData.destination}
                         onChange={handleChange}
-                        placeholder="e.g., Rwanda, Uganda"
+                        placeholder="Which country and experience interested you?"
                         className="bg-background border-border/80 rounded-xl h-12 focus:border-secondary focus:ring-secondary/20"
                       />
                     </div>

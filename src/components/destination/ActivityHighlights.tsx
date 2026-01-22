@@ -6,9 +6,10 @@ import { CountryActivity } from '@/data/countryData';
 interface ActivityHighlightsProps {
   activities: CountryActivity[];
   countryName: string;
+  activityHighlight?: string;
 }
 
-export const ActivityHighlights = ({ activities, countryName }: ActivityHighlightsProps) => {
+export const ActivityHighlights = ({ activities, countryName, activityHighlight }: ActivityHighlightsProps) => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -21,7 +22,7 @@ export const ActivityHighlights = ({ activities, countryName }: ActivityHighligh
             Activity <span className="text-primary">Highlights</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore  {countryName}'s most unforgettable experiences with Dream Destination Tours and Travel. From wildlife safaris to cultural encounters, each activity is carefully selected and led by experienced local guides to ensure safety, authenticity, and great value for every traveler.
+            {activityHighlight || `Explore ${countryName}'s most unforgettable experiences with Dream Destination Tours and Travel.`}
           </p>
         </div>
 

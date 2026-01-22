@@ -6,9 +6,10 @@ import { CarRental } from '@/data/countryData';
 interface CarRentalSectionProps {
   cars: CarRental[];
   countryName: string;
+  carRentalHighlight?: string;
 }
 
-export const CarRentalSection = ({ cars, countryName }: CarRentalSectionProps) => {
+export const CarRentalSection = ({ cars, countryName, carRentalHighlight }: CarRentalSectionProps) => {
   return (
     <section className="py-20 bg-card">
       <div className="container mx-auto px-4">
@@ -21,8 +22,7 @@ export const CarRentalSection = ({ cars, countryName }: CarRentalSectionProps) =
             Car Rental in <span className="text-primary">{countryName}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore {countryName} at your own pace with our reliable fleet of safari vehicles 
-            and comfortable road cars. All vehicles come with optional driver guides.
+            {carRentalHighlight || `Explore ${countryName} at your own pace with our reliable fleet of safari vehicles and comfortable road cars. All vehicles come with optional driver guides.`}
           </p>
         </div>
 

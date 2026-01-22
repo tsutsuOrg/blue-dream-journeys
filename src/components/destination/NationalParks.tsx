@@ -6,9 +6,10 @@ import { CountryPark } from '@/data/countryData';
 interface NationalParksProps {
   parks: CountryPark[];
   countryName: string;
+  parksHighlight?: string;
 }
 
-export const NationalParks = ({ parks, countryName }: NationalParksProps) => {
+export const NationalParks = ({ parks, countryName, parksHighlight }: NationalParksProps) => {
   return (
     <section className="py-20 bg-muted">
       <div className="container mx-auto px-4">
@@ -21,7 +22,7 @@ export const NationalParks = ({ parks, countryName }: NationalParksProps) => {
             National Parks & <span className="text-primary">Reserves</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover the protected areas that make {countryName} a world-class safari destination.
+            {parksHighlight || `Discover the protected areas that make ${countryName} a world-class safari destination.`}
           </p>
         </div>
 
