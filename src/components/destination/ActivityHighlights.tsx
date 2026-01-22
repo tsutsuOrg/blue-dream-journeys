@@ -21,8 +21,7 @@ export const ActivityHighlights = ({ activities, countryName }: ActivityHighligh
             Activity <span className="text-primary">Highlights</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover the incredible experiences awaiting you in {countryName}.
-            Each activity is led by expert local guides.
+            Explore  {countryName}'s most unforgettable experiences with Dream Destination Tours and Travel. From wildlife safaris to cultural encounters, each activity is carefully selected and led by experienced local guides to ensure safety, authenticity, and great value for every traveler.
           </p>
         </div>
 

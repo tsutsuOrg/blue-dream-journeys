@@ -117,7 +117,7 @@ const OurStory = () => {
                 </div>
                 <div className="flex-1 pb-8 pt-2">
                   <h3 className="text-xl font-heading font-semibold text-foreground mb-2">{milestone.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{milestone.description}</p>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{milestone.description}</p>
                 </div>
               </div>
             ))}

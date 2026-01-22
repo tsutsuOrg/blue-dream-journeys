@@ -15,8 +15,8 @@ export const destinations: Destination[] = [
   {
     slug: 'rwanda',
     name: 'Rwanda',
-    tagline: 'Land of a Thousand Hills',
-    description: 'Embark on a unique adventure and discover the magic of Rwanda\'s wildlife and culture. This remarkable country offers intimate gorilla encounters, stunning volcanic landscapes, and a rich cultural heritage that will leave you transformed.',
+    tagline: 'Discover Rwanda Tours with Dream Destination Tours and Travel – Expert Guides & Best Value Safaris.',
+    description: 'Discover Rwanda with Dream Destination Tours and Travel, the Land of a Thousand Hills. Rwanda offers breathtaking landscapes, mountain gorillas, rich wildlife, and a safe, welcoming environment for travelers. We provide expertly guided tours in Rwanda, including gorilla trekking, wildlife safaris, cultural experiences, and city tours, all designed to give excellent value for money. Travel with experienced local guides and enjoy unforgettable journeys tailored to your budget and interests.',
     highlights: [
       'Gorilla Trekking',
       'Golden Monkey Tracking',
